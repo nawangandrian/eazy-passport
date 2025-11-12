@@ -16,9 +16,43 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('pendaftaran.index')" :active="request()->routeIs('pendaftaran.*')" class="text-white hover:text-blue-300">
-                        {{ __('Pendaftaran') }}
-                    </x-nav-link>
+                    @if(auth()->user()->role !== 'KEPALA_KANTOR')
+                        <x-nav-link :href="route('pendaftaran.index')" 
+                                    :active="request()->routeIs('pendaftaran.*')" 
+                                    class="text-white hover:text-blue-300">
+                            {{ __('Pendaftaran') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if(Auth::user()->role === 'PIC')
+                        <x-nav-link :href="route('jadwal.saya')" :active="request()->routeIs('jadwal.saya*')" class="text-white hover:text-blue-300">
+                            Jadwal Saya
+                        </x-nav-link>
+                    @endif
+
+                    @if (Auth::user()->role === 'PETUGAS')
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" class="text-white hover:text-blue-300">
+                            Manajemen Pengguna
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('jadwal.index')" :active="request()->routeIs('jadwal.*')" class="text-white hover:text-blue-300">
+                            Kelola Jadwal Pelayanan
+                        </x-nav-link>
+
+                        {{-- Tambahkan menu Surat --}}
+                        <x-nav-link :href="route('surat.index')" :active="request()->routeIs('surat.*')" class="text-white hover:text-blue-300">
+                            Surat Pemberitahuan
+                        </x-nav-link>
+                    @elseif (Auth::user()->role === 'KEPALA_KANTOR')
+                        <x-nav-link :href="route('kepala.jadwal.index')" :active="request()->routeIs('kepala.jadwal.*')" class="text-white hover:text-blue-300">
+                            Tinjau Rencana Jadwal
+                        </x-nav-link>
+
+                        {{-- Tambahkan menu Surat --}}
+                        <x-nav-link :href="route('surat.index')" :active="request()->routeIs('surat.*')" class="text-white hover:text-blue-300">
+                            Surat Pemberitahuan
+                        </x-nav-link>
+                    @endif
 
                 </div>
             </div>
@@ -74,9 +108,41 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
+            @if(auth()->user()->role !== 'KEPALA_KANTOR')
             <x-responsive-nav-link :href="route('pendaftaran.index')" :active="request()->routeIs('pendaftaran.*')">
                 {{ __('Pendaftaran') }}
             </x-responsive-nav-link>
+            @endif
+
+            @if(Auth::user()->role === 'PIC')
+                <x-nav-link :href="route('jadwal.saya')" :active="request()->routeIs('jadwal.saya*')">
+                    Jadwal Saya
+                </x-nav-link>
+            @endif
+
+            @if (Auth::user()->role === 'PETUGAS')
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                    Manajemen User
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('jadwal.index')" :active="request()->routeIs('jadwal.*')">
+                    Kelola Jadwal Pelayanan
+                </x-responsive-nav-link>
+
+                {{-- Tambahkan menu Surat --}}
+                <x-responsive-nav-link :href="route('surat.index')" :active="request()->routeIs('surat.*')">
+                    Surat Pemberitahuan
+                </x-responsive-nav-link>
+            @elseif (Auth::user()->role === 'KEPALA_KANTOR')
+                <x-responsive-nav-link :href="route('kepala.jadwal.index')" :active="request()->routeIs('kepala.jadwal.*')">
+                    Tinjau Rencana Jadwal
+                </x-responsive-nav-link>
+
+                {{-- Tambahkan menu Surat --}}
+                <x-responsive-nav-link :href="route('surat.index')" :active="request()->routeIs('surat.*')">
+                    Surat Pemberitahuan
+                </x-responsive-nav-link>
+            @endif
 
         </div>
 

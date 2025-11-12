@@ -50,17 +50,6 @@ class PendaftaranController extends Controller
     {
         return view('pendaftaran.create');
     }
-
-    public function validasi(int $pendaftaran_id)
-    {
-        $pendaftaran = Pendaftaran::findOrFail($pendaftaran_id);
-
-        $pendaftaran->status_verifikasi = 'Valid';
-        // $pendaftaran->tanggal_validasi = now(); // opsional jika ada kolomnya
-        $pendaftaran->save();
-
-        return redirect()->back()->with('success', '✅ Pendaftaran berhasil divalidasi.');
-    }
     
     /**
      * Simpan data pendaftaran baru

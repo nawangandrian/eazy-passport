@@ -23,16 +23,56 @@ class PemohonController extends Controller
         $query = $pendaftaran->pemohons();
 
         if ($search) {
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('nama_lengkap', 'like', "%{$search}%")
-                  ->orWhere('nik', 'like', "%{$search}%");
+                    ->orWhere('nik', 'like', "%{$search}%");
             });
         }
 
         $pemohons = $query->latest()->paginate(10); // ganti 5 sesuai kebutuhan
-        $pemohons->appends(['search' => $search]); 
+        $pemohons->appends(['search' => $search]);
 
         return view('pemohon.index', compact('pendaftaran', 'pemohons'));
+    }
+
+    /**
+     * PETUGAS memvalidasi seluruh data pemohon dalam 1 pendaftaran
+     * dan mengubah status_verifikasi pendaftaran
+     */
+    public function validasiSemua(Request $request, $pendaftaran_id)
+    {
+        $request->validate([
+            'status_verifikasi' => 'required|in:Menunggu,Valid,Tidak Valid,Perlu Perbaikan',
+        ]);
+
+        $pendaftaran = Pendaftaran::findOrFail($pendaftaran_id);
+
+        // Update seluruh pemohon jadi 'Lengkap' jika status 'Valid'
+        if ($request->status_verifikasi == 'Valid') {
+            $pendaftaran->pemohons()->update(['status_data' => 'Lengkap']);
+        }
+
+        // Update status verifikasi pendaftaran
+        $pendaftaran->status_verifikasi = $request->status_verifikasi;
+        $pendaftaran->save();
+
+        return back()->with('success', 'Status verifikasi pendaftaran berhasil diperbarui.');
+    }
+
+    /**
+     * PETUGAS mengubah status data pemohon (Lengkap / Perlu Perbaikan)
+     */
+    public function updateStatus(Request $request, $pemohon_id)
+    {
+        $request->validate([
+            'status_data' => 'required|in:Lengkap,Perlu Perbaikan,Menunggu',
+        ]);
+
+        $pemohon = Pemohon::findOrFail($pemohon_id);
+        $pemohon->status_data = $request->status_data;
+        $pemohon->save();
+
+        return back()->with('success', 'Status data pemohon berhasil diperbarui.');
     }
 
     /**
@@ -85,7 +125,7 @@ class PemohonController extends Controller
         $pendaftaran->save();
 
         return redirect()->route('pemohon.index', $pendaftaran_id)
-                         ->with('success', 'Data pemohon berhasil ditambahkan.');
+            ->with('success', 'Data pemohon berhasil ditambahkan.');
     }
 
     public function edit($pendaftaran_id, Pemohon $pemohon)
@@ -141,7 +181,7 @@ class PemohonController extends Controller
         $pendaftaran->save();
 
         return redirect()->route('pemohon.index', $pendaftaran_id)
-                        ->with('success', 'Data pemohon berhasil diperbarui.');
+            ->with('success', 'Data pemohon berhasil diperbarui.');
     }
 
     // Hapus Pemohon
@@ -163,6 +203,6 @@ class PemohonController extends Controller
         $pendaftaran->save();
 
         return redirect()->route('pemohon.index', $pendaftaran_id)
-                        ->with('success', 'Data pemohon berhasil dihapus.');
+            ->with('success', 'Data pemohon berhasil dihapus.');
     }
 }

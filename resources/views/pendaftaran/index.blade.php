@@ -128,68 +128,89 @@
 
         {{-- 🧑‍💼 ROLE: PETUGAS - Tampilan Tabel --}}
         @elseif (Auth::user()->role === 'PETUGAS')
-            <h1 class="text-2xl font-bold text-blue-800 mb-6">Daftar Pendaftaran</h1>
 
-            <!-- Form Search -->
-            <form method="GET" action="{{ route('pendaftaran.index') }}" class="mb-4 flex justify-between items-center">
-                <input 
-                    type="text" 
-                    name="search" 
-                    value="{{ request('search') }}" 
-                    placeholder="🔍 Cari berdasarkan nama PIC, lokasi, atau jenis layanan..." 
-                    class="w-1/2 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                />
-                <button 
-                    type="submit" 
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition">
-                    Cari
-                </button>
-            </form>
+            {{-- Card Container --}}
+            <div class="bg-white shadow-lg rounded-xl border border-gray-200 p-6">
 
-            <div class="overflow-x-auto bg-white shadow-lg rounded-lg border border-gray-100">
-                <table class="w-full text-sm text-left text-gray-600">
-                    <thead class="bg-blue-900 text-white uppercase text-xs">
-                        <tr>
-                            <th class="px-6 py-3">#</th>
-                            <th class="px-6 py-3">PIC</th>
-                            <th class="px-6 py-3">Lokasi</th>
-                            <th class="px-6 py-3">Jenis Layanan</th>
-                            <th class="px-6 py-3">Tanggal</th>
-                            <th class="px-6 py-3">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($pendaftarans as $item)
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-6 py-3">{{ $pendaftarans->firstItem() + $loop->index }}</td>
-                                <td class="px-6 py-3">{{ $item->user->nama_lengkap ?? '-' }}</td>
-                                <td class="px-6 py-3">{{ $item->lokasi_layanan }}</td>
-                                <td class="px-6 py-3">{{ $item->jenis_layanan }}</td>
-                                <td class="px-6 py-3">{{ \Carbon\Carbon::parse($item->tanggal_pengajuan)->format('d-m-Y H:i') }}</td>
-                                <td class="px-6 py-3">
-                                    <span class="font-semibold
-                                        @if($item->status_verifikasi == 'Menunggu') text-yellow-600 
-                                        @elseif($item->status_verifikasi == 'Valid') text-green-700 
-                                        @elseif($item->status_verifikasi == 'Tidak Valid') text-red-700 
-                                        @else text-orange-700 @endif">
-                                        {{ $item->status_verifikasi }}
-                                    </span>
-                                </td>
-                            </tr>
-                        @empty
+                <!-- Header -->
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
+                    <h1 class="text-2xl font-bold text-blue-800 mb-4 sm:mb-0">Daftar Pendaftaran</h1>
+
+                    <!-- Form Search -->
+                    <form method="GET" action="{{ route('pendaftaran.index') }}" class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                        <input 
+                            type="text" 
+                            name="search" 
+                            value="{{ request('search') }}" 
+                            placeholder="🔍 Cari berdasarkan nama PIC, lokasi, atau jenis layanan..." 
+                            class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+                        />
+                        <button 
+                            type="submit" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition font-medium">
+                            Cari
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-700 rounded-lg">
+                        <thead class="bg-blue-900 text-white uppercase text-xs tracking-wider">
                             <tr>
-                                <td colspan="7" class="px-6 py-3 text-center text-gray-500">
-                                    Belum ada data pendaftaran ditemukan.
-                                </td>
+                                <th class="px-6 py-3 rounded-tl-lg">#</th>
+                                <th class="px-6 py-3">PIC</th>
+                                <th class="px-6 py-3">Lokasi</th>
+                                <th class="px-6 py-3">Jenis Layanan</th>
+                                <th class="px-6 py-3">Tanggal</th>
+                                <th class="px-6 py-3">Status</th>
+                                <th class="px-6 py-3 text-center rounded-tr-lg">Aksi</th>
                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @forelse ($pendaftarans as $item)
+                                <tr class="border-b hover:bg-blue-50 transition">
+                                    <td class="px-6 py-3">{{ $pendaftarans->firstItem() + $loop->index }}</td>
+                                    <td class="px-6 py-3 font-medium text-gray-800">{{ $item->user->nama_lengkap ?? '-' }}</td>
+                                    <td class="px-6 py-3">{{ $item->lokasi_layanan }}</td>
+                                    <td class="px-6 py-3">{{ $item->jenis_layanan }}</td>
+                                    <td class="px-6 py-3">{{ \Carbon\Carbon::parse($item->tanggal_pengajuan)->format('d-m-Y H:i') }}</td>
+                                    <td class="px-6 py-3">
+                                        @php
+                                            $statusColors = [
+                                                'Menunggu' => 'bg-yellow-100 text-yellow-800',
+                                                'Valid' => 'bg-green-100 text-green-800',
+                                                'Tidak Valid' => 'bg-red-100 text-red-800',
+                                            ];
+                                            $colorClass = $statusColors[$item->status_verifikasi] ?? 'bg-orange-100 text-orange-800';
+                                        @endphp
+                                        <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $colorClass }}">
+                                            {{ $item->status_verifikasi }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-3 text-center">
+                                        <a href="{{ route('pemohon.index', ['pendaftaran' => $item->pendaftaran_id]) }}" 
+                                            class="inline-flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm transition">
+                                            👁️ Lihat Pemohon
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="px-6 py-6 text-center text-gray-500 italic">
+                                        Belum ada data pendaftaran ditemukan.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
 
-            <!-- Pagination -->
-            <div class="mt-4">
-                {{ $pendaftarans->links('pagination::tailwind') }}
+                <!-- Pagination -->
+                <div class="mt-6">
+                    {{ $pendaftarans->links('pagination::tailwind') }}
+                </div>
+
             </div>
 
         @else

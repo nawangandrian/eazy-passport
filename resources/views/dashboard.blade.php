@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Dashboard Eazy Passport
         </h2>
     </x-slot>
@@ -8,20 +8,70 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Banner / Hero Section -->
-            <div class="relative rounded-xl overflow-hidden shadow-lg mb-10">
-                <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1600&q=80" 
-                     alt="Banner Eazy Passport" 
-                     class="w-full h-72 object-cover brightness-75">
+            <!-- 🌍 Modern Flat Hero Section (Eazy Passport) -->
+            <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-100 text-gray-800 rounded-2xl shadow-xl mb-12">
+                <div class="container mx-auto px-6 lg:px-16 py-20 flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+                    
+                    <!-- 🧭 Left Content -->
+                    <div class="flex-1 text-center lg:text-left">
+                        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4">
+                            Layanan <span class="text-blue-600">Paspor</span> Mudah & Cepat
+                        </h1>
+                        <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
+                            Kelola proses pendaftaran dan verifikasi paspor dengan sistem digital yang <span class="font-semibold text-blue-700">efisien</span>, 
+                            <span class="font-semibold text-blue-700">terintegrasi</span>, dan <span class="font-semibold text-blue-700">praktis</span>.
+                        </p>
 
-                <div class="absolute inset-0 bg-blue-900/50 flex flex-col justify-center items-center text-center text-white p-6">
-                    <h1 class="text-4xl font-bold mb-3">Selamat Datang di <span class="text-yellow-300">Eazy Passport</span></h1>
-                    <p class="max-w-2xl text-blue-100 text-lg">
-                        Sistem pelayanan paspor yang praktis, cepat, dan terintegrasi. 
-                        Kini Anda dapat mengelola pendaftaran dan pemohon dalam satu platform.
-                    </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="{{ route('pendaftaran.index') }}"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition transform hover:-translate-y-1 hover:shadow-xl">
+                                🚀 Mulai Sekarang
+                            </a>
+                            <a href="{{ route('dashboard') }}"
+                            class="border border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white font-semibold px-6 py-3 rounded-lg transition transform hover:-translate-y-1">
+                                Lihat Fitur
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 🌐 Right SVG Illustration -->
+                    <div class="flex-1 flex justify-center lg:justify-end">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" class="w-[480px] h-auto">
+                            <!-- Background shapes -->
+                            <circle cx="450" cy="300" r="240" fill="#DBEAFE"/>
+                            <circle cx="450" cy="300" r="180" fill="#BFDBFE"/>
+                            <circle cx="450" cy="300" r="120" fill="#93C5FD"/>
+                            
+                            <!-- Passport Book -->
+                            <rect x="370" y="180" width="160" height="230" rx="12" ry="12" fill="#1E40AF" stroke="#1E3A8A" stroke-width="4"/>
+                            <rect x="385" y="195" width="130" height="200" rx="8" ry="8" fill="#2563EB"/>
+                            
+                            <!-- Passport Globe Icon -->
+                            <circle cx="450" cy="290" r="45" fill="none" stroke="#EFF6FF" stroke-width="4"/>
+                            <path d="M450 245 A45 45 0 0 0 450 335 M405 290 H495" stroke="#EFF6FF" stroke-width="3"/>
+                            <path d="M432 245 C440 270,440 310,432 335 M468 245 C460 270,460 310,468 335" stroke="#EFF6FF" stroke-width="3"/>
+
+                            <!-- Text “PASSPORT” -->
+                            <text x="450" y="360" text-anchor="middle" font-size="20" fill="#EFF6FF" font-family="sans-serif" font-weight="bold">PASSPORT</text>
+
+                            <!-- Floating Icons (decorative) -->
+                            <circle cx="300" cy="180" r="12" fill="#60A5FA" opacity="0.9">
+                                <animate attributeName="cy" values="180;175;180" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="600" cy="420" r="10" fill="#3B82F6" opacity="0.8">
+                                <animate attributeName="cy" values="420;415;420" dur="4s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="520" cy="140" r="8" fill="#93C5FD" opacity="0.7">
+                                <animate attributeName="cy" values="140;135;140" dur="3.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Decorative Blur Element -->
+                <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full blur-3xl opacity-20 -z-10"></div>
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 -z-10"></div>
+            </section>
 
             <!-- Informasi Tambahan -->
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">

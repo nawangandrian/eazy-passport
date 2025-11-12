@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('no_telepon', 20);
             $table->string('no_paspor_lama', 20)->nullable();
-            $table->enum('status_data', ['Lengkap','Perlu Perbaikan'])->default('Perlu Perbaikan');
+            $table->enum('status_data', ['Lengkap', 'Perlu Perbaikan', 'Menunggu'])->default('Menunggu');
             $table->timestamps();
         });
     }

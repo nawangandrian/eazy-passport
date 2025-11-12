@@ -44,11 +44,11 @@
                     <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500 text-sm" />
                 </div>
 
-                <!-- Remember Me -->
+                <!-- Remember Me 
                 <div class="flex items-center mb-4">
                     <input id="remember_me" type="checkbox" name="remember" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                     <label for="remember_me" class="ml-2 text-gray-600 text-sm">Ingat saya</label>
-                </div>
+                </div> -->
 
                 <!-- Submit Button -->
                 <div class="mb-4">
@@ -68,12 +68,9 @@
                         Kembali
                     </a>
 
-                    <!-- Forgot Password -->
-                    @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="text-sm text-gray-500 hover:text-blue-700 transition">
-                            Lupa password?
+                        <a href="{{ route('register') }}" class="text-sm text-gray-500 hover:text-blue-700 transition">
+                            Belum punya akun?
                         </a>
-                    @endif
                 </div>
 
             </form>
