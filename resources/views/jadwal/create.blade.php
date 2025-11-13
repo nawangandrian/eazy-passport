@@ -5,7 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-3xl mx-auto py-8 px-4 mt-4 bg-white shadow-md rounded-lg">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="bg-white shadow-md py-8 mt-4 rounded p-6">
+
 
         @if(session('success'))
             <div class="mb-4 p-3 bg-green-100 text-green-700 rounded">{{ session('success') }}</div>
@@ -92,6 +95,7 @@
                    class="text-gray-600 underline hover:text-gray-800 transition duration-200">Batal</a>
             </div>
         </form>
+    </div>
     </div>
 
     <script>

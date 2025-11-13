@@ -43,7 +43,6 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// routes/web.php
 Route::middleware(['auth'])->group(function () {
     Route::get('/jadwal-saya', [SuratPemberitahuanController::class, 'jadwalSaya'])
         ->name('jadwal.saya');

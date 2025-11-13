@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- 🌍 Modern Flat Hero Section (Eazy Passport) -->
             <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-100 text-gray-800 rounded-2xl shadow-xl mb-12">
@@ -88,10 +88,10 @@
                 <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition">
                     <div class="flex items-center mb-3">
                         <div class="bg-blue-100 text-blue-700 p-3 rounded-full mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                 viewBox="0 0 24 24" stroke="currentColor">
+                            <!-- Icon Petir -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 8c-1.1 0-2 .9-2 2v6h4v-6c0-1.1-.9-2-2-2z" />
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-gray-800">Layanan Cepat</h3>
@@ -138,7 +138,7 @@
             </div>
 
             <!-- Alur Layanan Pengajuan -->
-            <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+            <div class="bg-white rounded-lg shadow-md p-8 mb-2">
                 <h3 class="text-2xl font-semibold text-gray-800 text-center mb-8">
                     Alur Layanan Pengajuan Eazy Passport
                 </h3>

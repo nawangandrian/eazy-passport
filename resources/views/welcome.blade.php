@@ -2,8 +2,36 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}" sizes="48x48">
+
+    <!-- Title -->
+    <title>Eazy Passport | Kantor Imigrasi Kelas I Non TPI Pati</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="Eazy Passport, aplikasi manajemen layanan imigrasi untuk Kantor Imigrasi Kelas I Non TPI Pati. Mudah, cepat, dan efisien.">
+
+    <!-- Meta Keywords (opsional, SEO) -->
+    <meta name="keywords" content="Eazy Passport, Imigrasi Pati, layanan imigrasi online, manajemen paspor">
+
+    <!-- Author -->
+    <meta name="author" content="Kantor Imigrasi Kelas I Non TPI Pati">
+
+    <!-- Viewport (responsive) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layanan Eazy Passport | Kantor Imigrasi</title>
+
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:title" content="Eazy Passport | Kantor Imigrasi Kelas I Non TPI Pati">
+    <meta property="og:description" content="Eazy Passport, aplikasi manajemen layanan imigrasi untuk Kantor Imigrasi Kelas I Non TPI Pati. Mudah, cepat, dan efisien.">
+    <meta property="og:image" content="{{ asset('img/preview-image.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Eazy Passport | Kantor Imigrasi Kelas I Non TPI Pati">
+    <meta name="twitter:description" content="Eazy Passport, aplikasi manajemen layanan imigrasi untuk Kantor Imigrasi Kelas I Non TPI Pati. Mudah, cepat, dan efisien.">
+    <meta name="twitter:image" content="{{ asset('img/preview-image.png') }}">
     @vite('resources/css/app.css')
 </head>
 <body class="bg-white text-gray-800 md:pb-0 pb-16">
